@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<import src='../template/bleconnect.wxml'/>
+<view>
+  <template is="bleconnect" data="{{ ...connect }}"></template>
+</view>
