@@ -24,6 +24,11 @@ App({
   },
 
   globalData: {
+    ios:false,
+    deviceId:null,
+    servierId: null,
+    writecharacteristicId: null,
+    indicatecharacteristicId: null,
     userInfo: null
   }
 })

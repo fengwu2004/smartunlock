@@ -1,4 +1,5 @@
 // main.js
+var app = getApp()
 Page({
 
   /**
@@ -11,8 +12,8 @@ Page({
       unlocksuccess: 2,
       unlocking: 3,
       unpay: 4,
-      doorStatus:0,
-      message: '支付失败，请重新支付!', 
+      doorStatus:4,
+      message: '全程统一票价', 
     },
     bottom: {
       paysuccess:0,
@@ -22,9 +23,43 @@ Page({
     }
   },
 
+  onLoad: function (options) {
+    var that = this
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function (userInfo) {
+      //更新数据
+      that.setData({
+        card: {
+          userHeadicon: userInfo.avatarUrl
+        } 
+      })
+    })
+  },
+
+  onPaySuccess:function(){
+
+
+  },
+
   payorder: function () {
   
-    
+    this.setData({
+      bottom: {
+        paysuccess: 1,
+      }
+    })
+
+    this.setData({
+      ticket: {
+        payfailed: 0,
+        unlockfailed: 1,
+        unlocksuccess: 2,
+        unlocking: 3,
+        unpay: 4,
+        doorStatus: 3,
+        message: '开闸中...!',
+      }
+    })
   },
 
   /**
