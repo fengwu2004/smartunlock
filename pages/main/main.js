@@ -44,21 +44,12 @@ Page({
   payorder: function () {
   
     this.setData({
-      bottom: {
-        paysuccess: 1,
-      }
+      'bottom.paysuccess':1
     })
 
     this.setData({
-      ticket: {
-        payfailed: 0,
-        unlockfailed: 1,
-        unlocksuccess: 2,
-        unlocking: 3,
-        unpay: 4,
-        doorStatus: 3,
-        message: '开闸中...!',
-      }
+      'ticket.doorStatus': 3,
+      'ticket.message' : '开闸中...!'
     })
   },
 
