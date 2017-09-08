@@ -1,11 +1,11 @@
 <template name="ticket">
   <view class="ticket">
     <view class="result">
-      <image wx:if="{{ doorStatus === payfailed }}" src="../image/failed.png" style="width:80px;height:75px"/>
-      <image wx:if="{{ doorStatus === unlockfailed }}" src="../image/unlockfailed.png" style="width:80px;height:83px"/>
-      <image wx:if="{{ doorStatus === unlocksuccess }}" src="../image/unlocksuccess.png" style="width:80px;height:83px"/>
-      <image wx:if="{{ doorStatus === unlocking }}" src="../image/circle.gif" style="width:80px;height:80px"/>
-      <view wx:if="{{ doorStatus === unpay }}">￥ 2.00</view>
+      <image wx:if="{{ doorStatus === 0 }}" src="../image/failed.png" style="width:80px;height:75px"/>
+      <image wx:if="{{ doorStatus === 1 }}" src="../image/unlockfailed.png" style="width:80px;height:83px"/>
+      <image wx:if="{{ doorStatus === 2 }}" src="../image/unlocksuccess.png" style="width:80px;height:83px"/>
+      <image wx:if="{{ doorStatus === 3 }}" src="../image/circle.gif" style="width:80px;height:80px"/>
+      <view wx:if="{{ doorStatus === 4 }}">￥ 2.00</view>
     </view>
     <view id="tip">
     {{ message }}

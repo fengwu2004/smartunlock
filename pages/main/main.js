@@ -1,5 +1,14 @@
 // main.js
 var app = getApp()
+
+var doorStatus = {
+		payfailed: 0,
+		unlockfailed: 1,
+		unlocksuccess: 2,
+		unlocking: 3,
+		unpay: 4
+}
+
 Page({
 
   /**
@@ -7,16 +16,13 @@ Page({
    */
   data: {
     ticket:{
-      payfailed: 0,
-      unlockfailed: 1,
-      unlocksuccess: 2,
-      unlocking: 3,
-      unpay: 4,
       doorStatus:4,
       message: '全程统一票价', 
     },
     bottom: {
+    	needReunlock:0,
       paysuccess:0,
+			title:'立即支付'
     },
     card: {
       userHeadicon:'http://wx.indoorun.com/indoorun/indoorun/unlock/dist/static/avatar.png'
@@ -36,21 +42,65 @@ Page({
     })
   },
 
-  onPaySuccess:function(){
+  promisePayOrder:function(){
 
-
+		return new Promise(function(resolve, reject) {
+			
+			setTimeout(function() {
+				
+				resolve(true)
+				
+			}, 1000)
+		})
   },
 
-  payorder: function () {
+  unlock: function () {
   
-    this.setData({
-      'bottom.paysuccess':1
-    })
-
-    this.setData({
-      'ticket.doorStatus': 3,
-      'ticket.message' : '开闸中...!'
-    })
+  	this.promisePayOrder()
+			.then(()=>{
+				
+				this.setData({
+					'bottom.paysuccess':1,
+					'ticket.doorStatus': doorStatus.unlocking,
+					'ticket.message' : '开闸中...!'
+				})
+				
+				return Promise.resolve()
+			})
+			.catch(()=> {
+				
+				this.setData({
+					'bottom.paysuccess':0,
+					'ticket.doorStatus': doorStatus.payfailed,
+					'ticket.message' : '支付失败，请重新支付!'
+				})
+				
+				return Promise.reject()
+			})
+			.then(()=> {
+				
+				app.unLock((result) => {
+					
+					if (result) {
+						
+						this.setData({
+							'ticket.doorStatus': doorStatus.unlocksuccess,
+							'ticket.message' : '闸机开启成功，祝您乘车愉快!'
+						})
+					}
+					else {
+						
+						this.setData({
+							'ticket.doorStatus': doorStatus.unlockfailed,
+							'ticket.message' : '闸机开启失败，请重试!',
+							'bottom.title' : '重新开闸'
+						})
+					}
+				})
+			})
+			.catch(()=>{
+  	
+			})
   },
 
   /**
