@@ -292,6 +292,8 @@ App({
         self.setTip('开锁成功')
 	
 				self.globalData.unlockCallback && self.globalData.unlockCallback(true)
+				
+				self.doDisconnect()
       }
       else {
 
@@ -305,6 +307,19 @@ App({
       return
     }
   },
+	
+	doDisconnect: function() {
+		
+  	var self = this
+		
+  	wx.closeBLEConnection({
+			
+			deviceId:self.globalData.deviceId,
+			success:()=>{},
+			fail:()=>{},
+			complete:()=>{},
+		})
+	},
 
   doReceive: function (res) {
 
