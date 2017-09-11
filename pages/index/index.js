@@ -39,7 +39,7 @@ Page({
 			}
 			else {
 				
-				this.onConnectSuccess()
+				this.onConnectFailed()
 			}
 		})
   },

@@ -221,9 +221,11 @@ App({
   setTip: function (str) {
 
   },
-  unLock: function () {
+  unLock: function (cb) {
 
     var self = this
+		
+		self.globalData.unlockCallback = cb
 
     console.log('准备发送payorderid')
     self.promiseOfSendData(self.globalData.payorderId, 1)
@@ -288,10 +290,14 @@ App({
       if (self.globalData.unlockresult == '1') {
 
         self.setTip('开锁成功')
+	
+				self.globalData.unlockCallback && self.globalData.unlockCallback(true)
       }
       else {
 
         self.setTip('开锁失败')
+	
+				self.globalData.unlockCallback && self.globalData.unlockCallback(false)
       }
 
       console.log('unlockresult: ' + self.globalData.unlockresult)
