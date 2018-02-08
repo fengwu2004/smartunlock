@@ -31,16 +31,16 @@ Page({
 
   onLoad: function (options) {
   	
-  	app.doConnect((result) => {
+  	// app.doConnect((result) => {
 	
-			if (result) {
+		// 	if (result) {
 				
-				this.onConnectSuccess()
-			}
-			else {
+		// 		this.onConnectSuccess()
+		// 	}
+		// 	else {
 				
-				this.onConnectFailed()
-			}
-		})
+		// 		this.onConnectFailed()
+		// 	}
+		// })
   },
 })
