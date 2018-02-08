@@ -14,33 +14,8 @@ Page({
     this.setData(keyvalue)
   },
 
-  onConnectFailed: function(){
-
-    this.updateData({
-      connect: {
-        connectstatus: 1
-      }
-    })
-  },
-
-  onConnectSuccess: function () {
-    wx.navigateTo({
-      url: '../main/main'
-    })
-  },
-
   onLoad: function (options) {
   	
-  	// app.doConnect((result) => {
-	
-		// 	if (result) {
-				
-		// 		this.onConnectSuccess()
-		// 	}
-		// 	else {
-				
-		// 		this.onConnectFailed()
-		// 	}
-		// })
+  	
   },
 })
